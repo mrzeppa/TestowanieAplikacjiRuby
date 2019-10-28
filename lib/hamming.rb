@@ -1,15 +1,14 @@
 class Hamming
-    def self.compute(first, second)
-        if first.length != second.length
+    def self.compute(string1,string2)
+        count=0
+        if string1.length != string2.length
             raise ArgumentError
         end
-        hamming = 0
-        second_chars = second.split('')
-        first.each_char.with_index do |c, index|
-            if second_chars[index] != c
-                hamming+=1;
+        for x in 0..string1.length
+            if string1[x] != string2[x] then
+                count +=1
             end
         end
-        return hamming
+        return count
     end
 end

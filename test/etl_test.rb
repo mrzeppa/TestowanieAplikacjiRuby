@@ -4,6 +4,7 @@ require_relative '../lib/etl'
 # Common test data version: 1.0.0 ca9ed58
 class EtlTest < Minitest::Test
   def test_a_single_letter
+    # skip
     old = {
       1 => ["A"]
     }
@@ -14,6 +15,7 @@ class EtlTest < Minitest::Test
   end
 
   def test_single_score_with_multiple_letters
+    #skip
     old = {
       1 => ["A", "E", "I", "O", "U"]
     }
@@ -28,6 +30,7 @@ class EtlTest < Minitest::Test
   end
 
   def test_multiple_scores_with_multiple_letters
+    #skip
     old = {
       1 => ["A", "E"],
       2 => ["D", "G"]
@@ -42,6 +45,7 @@ class EtlTest < Minitest::Test
   end
 
   def test_multiple_scores_with_differing_numbers_of_letters
+    #skip
     old = {
       1 => ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"],
       2 => ["D", "G"],

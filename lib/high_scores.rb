@@ -1,26 +1,25 @@
 class HighScores
     def initialize(scores)
-        @scores = scores
-    end
+        @scores=scores
+    end 
 
     def scores
         return @scores
     end
 
     def latest
-        return @scores.last
+        return @scores[-1]
     end
 
     def personal_best
         return @scores.max
-    end
+    end 
 
     def personal_top_three
         return @scores.max(3)
     end
 
     def latest_is_personal_best?
-        personal_best == latest
-    end
-
+        return personal_best==latest
+    end 
 end

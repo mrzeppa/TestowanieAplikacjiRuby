@@ -1,10 +1,9 @@
 class ETL
-    def self.transform(old)
-      old.reduce({}) do |accumulator, (points, letters)|
-        letters.each do |letter|
-          accumulator[letter.downcase] = points
-        end
-        accumulator
-      end
+    def self.transform(input)
+        Hash[
+            input.flat_map do |score, letters|
+              letters.map(&:downcase).product([score])
+            end
+          ]
     end
-  end
+end
