@@ -1,10 +1,9 @@
 require 'minitest/autorun'
-require_relative 'acronym'
+require_relative '../lib/acronym'
 
 # Common test data version: 1.7.0 cacf1f1
 class AcronymTest < Minitest::Test
   def test_basic
-    # skip
     assert_equal "PNG", Acronym.abbreviate('Portable Network Graphics')
   end
 

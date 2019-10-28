@@ -15,4 +15,3 @@ class HelloWorldTest < Minitest::Test
     assert_equal "Hello, World!", HelloWorld.hello
   end
 end
-
