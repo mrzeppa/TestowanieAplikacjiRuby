@@ -25,6 +25,6 @@ describe Matrix do
 	end
 	it "test_extract_another_column" do
 	    matrix = Matrix.new("89 1903 3\n18 3 1\n9 4 800")
-		expect (matrix.columns[1]).to eq [1903, 3, 4]
+		expect(matrix.columns[1]).to eq [1903, 3, 4]
 	end
 end
