@@ -29,7 +29,7 @@ describe Series do
 		expect(Series.series.slices(3)).to eq ['310', '100', '001']
 	end
 	it "test_other_slices_of_three" do
-		series = Series.new('982347')
+	series = Series.new('982347')
 		expect(Series.series.slices(3)).to eq ['982', '823', '234', '347']
 	end
 	it "test_simple_slices_of_four" do
@@ -52,13 +52,12 @@ describe Series do
 		series = Series.new('01234')
 		expect(Series.series.slices(6)).to eq raise_error
 	end
-	def
-		it "test_more_complicated_slice_that_blows_up" do
+	it "test_more_complicated_slice_that_blows_up" do
 		slice_string = '01032987583'
 		series = Series.new(slice_string)
 		expect(Series.series.slices(slice_string.length + 1)).to raise_error
 	end
-	def test_sequential_slices
+	it "test_sequential_slices"
 		series = Series.new('1234')
 		expect(Series.series.slices(2)).to eq ['12', '23', '34']
 		expect(Series.series.slices(3)).to eq ['123', '234']
