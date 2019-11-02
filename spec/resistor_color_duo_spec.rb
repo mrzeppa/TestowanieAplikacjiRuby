@@ -1,5 +1,5 @@
 require_relative '../lib/resistor_color_duo'
-describe TwoFer do
+describe ResistorColorDuo do
 	it "test_brown_and_black" do
 		expect(ResistorColorDuo.value(["brown", "black"])).to eq 10
 	end
