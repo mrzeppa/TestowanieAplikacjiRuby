@@ -1,5 +1,5 @@
 require_relative '../lib/word_count'
-describe HighScores do
+describe WordCount do
 	it "test_count_one_word" do
 		phrase = Phrase.new("word")
 		counts = {"word"=>1}
