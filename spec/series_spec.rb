@@ -50,12 +50,12 @@ describe Series do
 	end
 	it "test_simple_slice_that_blows_up" do
 		series = Series.new('01234')
-		expect(series.slices(6)).to eq Series.ArgumentError
+		expect(series.slices(6)).to raise_error(ArgumentError)
 	end
 	it "test_more_complicated_slice_that_blows_up" do
 		slice_string = '01032987583'
 		series = Series.new(slice_string)
-		expect(series.slices(slice_string.length + 1)).to eq Series.ArgumentError
+		expect(series.slices(slice_string.length + 1)).to raise_error(ArgumentError)
 	end
 	it "test_sequential_slices" do
 		series = Series.new('1234')
