@@ -64,6 +64,6 @@ describe RunLengthEncoding do
 	it "test_consistency_encode_followed_by_decode_gives_original_string" do
 		input = 'zzz ZZ  zZ'
 		encoded = RunLengthEncoding.encode(input)
-		expect(RunLengthEncoding.decode(input)).to eq output
+		expect(RunLengthEncoding.decode(input)).to eq encoded
 	end
 end
