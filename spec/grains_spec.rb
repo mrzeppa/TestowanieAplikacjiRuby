@@ -27,15 +27,15 @@ describe Grains do
 	end
 	
 	it "test_square_0_raises_an_exception" do
-		expect { Grains.square(0) }.to eq raise_error(ArgumentError)
+		expect { Grains.square(0) }.to raise_error(ArgumentError)
 	end
 	
 	it "test_negative_square_raises_an_exception" do
-		expect { Grains.square(-1) }.to eq raise_error(ArgumentError)
+		expect { Grains.square(-1) }.to raise_error(ArgumentError)
 	end
 	
 	it "test_square_greater_than_64_raises_an_exception" do
-		expect { Grains.square(65) }.to eq raise_error(ArgumentError)
+		expect { Grains.square(65) }.to raise_error(ArgumentError)
 	end
 	
 	it "test_returns_the_total_number_of_grains_on_the_board" do
