@@ -10,7 +10,7 @@ describe Series do
 	end
 	it "test_simple_slices_of_one_again" do
 	    series = Series.new('01234')
-		expect(series.slices(2)).to ['01', '12', '23', '34']
+		expect(series.slices(2)).to eq ['01', '12', '23', '34']
 	end
 	it "test_other_slices_of_two" do
 		series = Series.new('98273463')
@@ -50,12 +50,12 @@ describe Series do
 	end
 	it "test_simple_slice_that_blows_up" do
 		series = Series.new('01234')
-		expect(series.slices(6)).to eq raise_error
+		expect(series.slices(6)).to eq Series.ArgumentError
 	end
 	it "test_more_complicated_slice_that_blows_up" do
 		slice_string = '01032987583'
 		series = Series.new(slice_string)
-		expect(series.slices(slice_string.length + 1)).to raise_error
+		expect(series.slices(slice_string.length + 1)).to eq Series.ArgumentError
 	end
 	it "test_sequential_slices" do
 		series = Series.new('1234')
