@@ -57,7 +57,7 @@ describe Series do
 		series = Series.new(slice_string)
 		expect(Series.series.slices(slice_string.length + 1)).to raise_error
 	end
-	it "test_sequential_slices"
+	it "test_sequential_slices" do
 		series = Series.new('1234')
 		expect(Series.series.slices(2)).to eq ['12', '23', '34']
 		expect(Series.series.slices(3)).to eq ['123', '234']
