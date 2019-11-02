@@ -1,5 +1,5 @@
-require_relative '../lib/grains'
-describe Grains do
+require_relative '../lib/run_length_encoding'
+describe RunLengthEncoding do
 	it "test_encode_empty_string" do
 	    input = ''
 		output = ''
