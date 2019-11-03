@@ -27,4 +27,12 @@ describe School do
 		expected = ['Aimee']
 		expect(school.students(2)).to eq expected
 	end
+	
+	it "test_grade_with_multiple_students" do
+		school = School.new
+		grade    = 6
+		students = %w(Aimee Beemee Ceemee)
+		students.each { |student| school.add(student, grade) }
+		expect(school.students(grade))).to eq students
+	end
 end
