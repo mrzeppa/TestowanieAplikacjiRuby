@@ -21,4 +21,10 @@ describe GradeSchool do
 		expect(school.students(1)).to eq expected
 	end
 	
+	it "test_add_student" do
+		school = School.new
+		school.add('Aimee', 2)
+		expected = ['Aimee']
+		expect(school.students(2)).to eq expected
+	end
 end
