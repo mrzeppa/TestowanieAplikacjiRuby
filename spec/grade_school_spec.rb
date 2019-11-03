@@ -1,5 +1,5 @@
 require_relative '../lib/grade_school'
-describe GradeSchool do
+describe School do
 	everyone 
 	[
       { grade: 3, students: %w(Deemee Eeemee) },
