@@ -1,5 +1,5 @@
 require_relative '../lib/grains'
-describe Allergies do
+describe Grains do
 	it "test_1" do
 		expect(Grains.square(1)).to eq 1
 	end
