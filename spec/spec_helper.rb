@@ -97,4 +97,12 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+# frozen_string_literal: true
+
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec/' # for rspec
+  add_filter '/test/' # for minitest
+end
+
 end
