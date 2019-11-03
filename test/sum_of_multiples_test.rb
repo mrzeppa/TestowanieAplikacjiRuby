@@ -24,7 +24,7 @@ class SumOfMultiplesTest < Minitest::Test
   def test_more_than_one_factor_with_multiples_within_limit
     #skip
     sum_of_multiples = SumOfMultiples.new(3, 5)
-    assert_equal 13, sum_of_multiples.to(10)
+    assert_equal 23, sum_of_multiples.to(10)
   end
 
   def test_each_multiple_is_only_counted_once
