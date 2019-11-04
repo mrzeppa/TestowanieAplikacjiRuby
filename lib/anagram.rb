@@ -1,23 +1,9 @@
 class Anagram
-    def initialize(word)
-        @word=word
-        @array=[]
+    def initialize word
+      @word = word.downcase
     end
-
-    def match(list)
-        for i in list
-            s=0
-            if i.length == @word.length && i.downcase!=@word.downcase
-                for j in 0..i.length-1
-                    if @word.downcase.chars.sort()[j] == i.downcase.chars.sort()[j]
-                        s+=1
-                    end
-                end
-                if s==i.length
-                    @array << i
-                end
-            end
-        end
-        return @array
+    
+    def match words
+      words.select{|match| match.downcase.chars.sort.join == @word.chars.sort.join && match.downcase != @word}
     end
-end
+  end

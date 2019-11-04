@@ -1,1 +1,0 @@
-https://travis-ci.org/mrzeppa/TestowanieAplikacjiRuby.svg?branch=master 
