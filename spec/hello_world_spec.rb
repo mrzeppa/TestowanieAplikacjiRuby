@@ -1,6 +1,9 @@
-require_relative '../lib/hello_world'
-describe HelloWorld do
-  it "say hello" do
-    expect(HelloWorld.hello).to eq "Hello, World!"
+require_relative('../lib/hello_world')
+
+RSpec.describe HelloWorld do
+  describe " .hello" do
+   it 'Says hi' do 
+      expect(HelloWorld.hello).to(eq('Hello, World!'))
+    end
   end
 end

@@ -1,7 +1,7 @@
-require 'bowling'
+require_relative '../lib/bowling'
 
 RSpec.describe Game do
-
+	describe "#score" do
  		 game1 = Game.new
 		 rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 		 rolls.each { |pins| game1.roll(pins) }
@@ -92,100 +92,98 @@ RSpec.describe Game do
 		 it 'all strikes is a perfect game' do
 			expect(game13.score).to eq 300
 		 end
+		 context 'an exception is raised when' do
+			err_game1 = Game.new
+			rolls = []
+			rolls.each { |pins| err_game1.roll(pins) }
+			it 'rolls cannot score negative points' do
+				expect{err_game1.roll(-1)}.to raise_error Game::BowlingError
+			end
 
+			err_game2 = Game.new
+			rolls = [5]
+			rolls.each { |pins| err_game2.roll(pins) }
+			it 'rolls in a frame cannot score more than 10 points' do
+				expect{err_game2.roll(6)}.to raise_error Game::BowlingError
+			end
 
+			
+			err_game3 = Game.new
+			rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]
+			rolls.each { |pins| err_game3.roll(pins) }
+			it 'bonus roll after a strike in the last frame cannot score more than 10 points' do
+				expect{err_game3.roll(11)}.to raise_error Game::BowlingError
+			end
 
-		 err_game1 = Game.new
-		 rolls = []
-		 rolls.each { |pins| err_game1.roll(pins) }
-		 it 'rolls cannot score negative points' do
-			 expect{err_game1.roll(-1)}.to raise_error Game::BowlingError
-		 end
+			err_game4 = Game.new
+			rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 5]
+			rolls.each { |pins| err_game4.roll(pins) }
+			it 'two bonus roll after a strike in the last frame cannot score more than 10 points' do
+				expect{err_game4.roll(6)}.to raise_error Game::BowlingError
+			end
 
-		 err_game2 = Game.new
-		 rolls = [5]
-		 rolls.each { |pins| err_game2.roll(pins) }
-		 it 'rolls in a frame cannot score more than 10 points' do
-			 expect{err_game2.roll(6)}.to raise_error Game::BowlingError
-		 end
+			err_game5 = Game.new
+			rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 6]
+			rolls.each { |pins| err_game5.roll(pins) }
+			it 'the second bonus after a strike cannot be a strike the first is not a strike' do
+				expect{err_game5.roll(10)}.to raise_error Game::BowlingError
+			end
 
-		 
-		 err_game3 = Game.new
-		 rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]
-		 rolls.each { |pins| err_game3.roll(pins) }
-		 it 'bonus roll after a strike in the last frame cannot score more than 10 points' do
-			 expect{err_game3.roll(11)}.to raise_error Game::BowlingError
-		 end
+			err_game6 = Game.new
+			rolls =  []
+			rolls.each { |pins| err_game6.roll(pins) }
+			it 'an unstarted game cannot be scored' do
+				expect{err_game6.score}.to raise_error Game::BowlingError
+			end
 
-		 err_game4 = Game.new
-		 rolls = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 5]
-		 rolls.each { |pins| err_game4.roll(pins) }
-		 it 'two bonus roll after a strike in the last frame cannot score more than 10 points' do
-			 expect{err_game4.roll(6)}.to raise_error Game::BowlingError
-		 end
+			err_game7 = Game.new
+			rolls =  [0, 0 , 2]
+			rolls.each { |pins| err_game7.roll(pins) }
+			it 'an incomplete game cannot be scored' do
+				expect{err_game7.score}.to raise_error Game::BowlingError
+			end
 
-		 err_game5 = Game.new
-		 rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 6]
-		 rolls.each { |pins| err_game5.roll(pins) }
-		 it 'the second bonus after a strike cannot be a strike the first is not a strike' do
-			 expect{err_game5.roll(10)}.to raise_error Game::BowlingError
-		 end
+			err_game8 = Game.new
+			rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			rolls.each { |pins| err_game8.roll(pins) }
+			it 'cannot roll if game already has 10 frames' do
+				expect{err_game8.roll(1)}.to raise_error Game::BowlingError
+			end
 
-		 err_game6 = Game.new
-		 rolls =  []
-		 rolls.each { |pins| err_game6.roll(pins) }
-		 it 'an unstarted game cannot be scored' do
-			 expect{err_game6.score}.to raise_error Game::BowlingError
-		 end
+			err_game9 = Game.new
+			rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]
+			rolls.each { |pins| err_game9.roll(pins) }
+			it 'bonus after the last strike must be rolled before scored can be calculated' do
+				expect{err_game9.score}.to raise_error Game::BowlingError
+			end
 
-		 err_game7 = Game.new
-		 rolls =  [0, 0 , 2]
-		 rolls.each { |pins| err_game7.roll(pins) }
-		 it 'an incomplete game cannot be scored' do
-			 expect{err_game7.score}.to raise_error Game::BowlingError
-		 end
+			err_game10 = Game.new
+			rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10]
+			rolls.each { |pins| err_game10.roll(pins) }
+			it 'both bonus after the last strike must be rolled before scored can be calculated' do
+				expect{err_game10.score}.to raise_error Game::BowlingError
+			end
 
-		 err_game8 = Game.new
-		 rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		 rolls.each { |pins| err_game8.roll(pins) }
-		 it 'cannot roll if game already has 10 frames' do
-			 expect{err_game8.roll(1)}.to raise_error Game::BowlingError
-		 end
+			err_game11 = Game.new
+			rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3]
+			rolls.each { |pins| err_game11.roll(pins) }
+			it 'bonus roll for a spare in the last frame must be rolled before scored can be calculated' do
+				expect{err_game11.score}.to raise_error Game::BowlingError
+			end
 
-		 err_game9 = Game.new
-		 rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10]
-		 rolls.each { |pins| err_game9.roll(pins) }
-		 it 'bonus after the last strike must be rolled before scored can be calculated' do
-			 expect{err_game9.score}.to raise_error Game::BowlingError
-		 end
+			err_game12 = Game.new
+			rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 2]
+			rolls.each { |pins| err_game12.roll(pins) }
+			it 'cannot roll after bonus roll for spare ' do
+				expect{err_game12.roll(3)}.to raise_error Game::BowlingError
+			end
 
-		 err_game10 = Game.new
-		 rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10]
-		 rolls.each { |pins| err_game10.roll(pins) }
-		 it 'both bonus after the last strike must be rolled before scored can be calculated' do
-			 expect{err_game10.score}.to raise_error Game::BowlingError
-		 end
-
-		 err_game11 = Game.new
-		 rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3]
-		 rolls.each { |pins| err_game11.roll(pins) }
-		 it 'bonus roll for a spare in the last frame must be rolled before scored can be calculated' do
-			 expect{err_game11.score}.to raise_error Game::BowlingError
-		 end
-
-		 err_game12 = Game.new
-		 rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 2]
-		 rolls.each { |pins| err_game12.roll(pins) }
-		 it 'cannot roll after bonus roll for spare ' do
-			 expect{err_game12.roll(3)}.to raise_error Game::BowlingError
-		 end
-
-		 err_game13 = Game.new
-		 rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 3, 2]
-		 rolls.each { |pins| err_game13.roll(pins) }
-		 it 'cannot roll afteer bonus roll for strike' do
-			 expect{err_game13.roll(3)}.to raise_error Game::BowlingError
-		 end
-
-
+			err_game13 = Game.new
+			rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 3, 2]
+			rolls.each { |pins| err_game13.roll(pins) }
+			it 'cannot roll afteer bonus roll for strike' do
+				expect{err_game13.roll(3)}.to raise_error Game::BowlingError
+			end
+		end
+	end
 end
